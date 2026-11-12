@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14263d">
+<meta name="description" content="AarizHomestay membantu anda mencari homestay, hotel, Airbnb dan studio. Hantar pertanyaan penginapan terus melalui WhatsApp.">
+<title>AarizHomestay | Cari Penginapan Anda</title>
+<style>
+:root{
+  --navy:#14263d;--navy2:#1c3552;--cream:#f7f2e8;--cream2:#eee5d5;
+  --gold:#c5a56a;--gold2:#e0c58f;--ink:#1d2733;--muted:#68717d;
+  --white:#fff;--line:#e5dfd3;--shadow:0 18px 48px rgba(20,38,61,.12);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.container{width:min(1160px,calc(100% - 40px));margin:0 auto}
+.topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(20,38,61,.08)}
+.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;color:var(--navy);font-weight:900;letter-spacing:.035em;font-size:1rem}
+.brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:var(--navy);color:var(--gold2);font-family:Georgia,serif;font-size:1.45rem;box-shadow:0 7px 18px rgba(20,38,61,.18)}
+.nav-links{display:flex;align-items:center;gap:26px;color:#596574;font-size:.92rem;font-weight:650}
+.nav-links a:hover{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:12px;padding:13px 19px;background:var(--navy);color:white;font-weight:800;transition:.2s}
+.btn:hover{background:var(--navy2);transform:translateY(-1px)}
+.btn.gold{background:var(--gold);color:#17263a}
+.btn.gold:hover{background:var(--gold2)}
+.btn.outline{background:transparent;border:1px solid rgba(255,255,255,.5);color:white}
+.btn.outline:hover{background:rgba(255,255,255,.1)}
+.menu-toggle{display:none;border:1px solid var(--line);background:white;color:var(--navy);border-radius:10px;padding:9px 12px}
+.hero{position:relative;isolation:isolate;min-height:590px;display:flex;align-items:center;color:white;background:linear-gradient(90deg,rgba(12,28,47,.88),rgba(12,28,47,.55) 55%,rgba(12,28,47,.16)),url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=85") center/cover}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:110px;background:linear-gradient(transparent,rgba(8,20,34,.25));z-index:-1}
+.hero-content{padding:88px 0 112px;max-width:760px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;text-transform:uppercase;letter-spacing:.16em;font-size:.76rem;font-weight:850;color:var(--gold2)}
+.eyebrow:before{content:"";width:26px;height:2px;background:var(--gold)}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.8rem,7vw,5.35rem);font-weight:500;line-height:1.02;letter-spacing:-.045em;margin:19px 0}
+h1 span{color:var(--gold2);font-style:italic}
+.hero-copy{max-width:600px;color:#edf0f3;font-size:1.08rem;margin:0 0 28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-note{font-size:.82rem;color:#e0e4e8;margin-top:20px}
+.search-wrap{position:relative;z-index:5;margin-top:-58px}
+.search-card{background:white;border-radius:20px;padding:22px;box-shadow:var(--shadow);border:1px solid rgba(20,38,61,.08)}
+.search-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.search-title h2{font-size:1.12rem;color:var(--navy);margin:0}
+.search-title span{font-size:.78rem;color:var(--muted)}
+.search-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr .8fr 1fr auto;gap:11px;align-items:end}
+.field label{display:block;font-size:.76rem;font-weight:800;color:#566171;margin:0 0 6px}
+.field input,.field select,.field textarea{width:100%;min-width:0;border:1px solid #e4e6e9;border-radius:11px;padding:12px 12px;background:#fbfbfa;color:var(--ink);outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,165,106,.15)}
+section{padding:82px 0}
+.section-cream{background:var(--cream)}
+.section-head{max-width:690px;margin-bottom:32px}
+.section-head .eyebrow{color:#9a7943}
+.section-head h2{font-family:Georgia,"Times New Roman",serif;color:var(--navy);font-weight:500;font-size:clamp(2rem,4vw,3rem);line-height:1.12;letter-spacing:-.035em;margin:12px 0}
+.section-head p{color:#68717d;margin:0}
+.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+.category-card{position:relative;min-height:280px;border-radius:19px;overflow:hidden;color:white;display:flex;align-items:flex-end;padding:20px;background:#24374b;isolation:isolate;box-shadow:0 12px 28px rgba(20,38,61,.1)}
+.category-card:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,20,34,.88),rgba(8,20,34,.04) 75%);z-index:-1}
+.category-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .45s}
+.category-card:hover img{transform:scale(1.06)}
+.category-card h3{font-family:Georgia,serif;font-size:1.55rem;font-weight:500;margin:0 0 4px}
+.category-card p{font-size:.82rem;color:#e5e8ec;margin:0}
+.category-card .arrow{position:absolute;right:17px;top:17px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;backdrop-filter:blur(6px)}
+.empty-state{background:white;border:1px dashed #c9c0b1;border-radius:20px;padding:34px;text-align:center}
+.empty-icon{width:58px;height:58px;border-radius:18px;background:var(--cream);color:#9a7943;display:grid;place-items:center;font-size:1.6rem;margin:0 auto 13px}
+.empty-state h3{color:var(--navy);margin:0 0 7px}
+.empty-state p{max-width:590px;margin:0 auto 18px;color:var(--muted);font-size:.92rem}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.benefit{background:white;border:1px solid var(--line);border-radius:18px;padding:23px}
+.benefit-icon{width:44px;height:44px;border-radius:14px;background:#f2eadb;color:#987640;display:grid;place-items:center;font-size:1.25rem;margin-bottom:15px}
+.benefit h3{margin:0 0 7px;color:var(--navy);font-size:1.05rem}
+.benefit p{margin:0;color:var(--muted);font-size:.9rem}
+.host-banner{background:var(--navy);color:white;border-radius:24px;padding:36px;display:flex;align-items:center;justify-content:space-between;gap:25px;overflow:hidden;position:relative}
+.host-banner:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:14%;top:-170px;border:1px solid rgba(224,197,143,.35);box-shadow:0 0 0 35px rgba(224,197,143,.04),0 0 0 70px rgba(224,197,143,.03)}
+.host-banner h2{font-family:Georgia,serif;font-weight:500;font-size:2rem;line-height:1.12;margin:0 0 9px}
+.host-banner p{color:#d4dbe2;margin:0;max-width:620px;font-size:.92rem}
+.faq-list{display:grid;gap:11px;max-width:850px}
+details{background:white;border:1px solid var(--line);border-radius:14px;padding:17px 19px}
+summary{cursor:pointer;color:var(--navy);font-weight:800}
+details p{color:var(--muted);margin:11px 0 0;font-size:.9rem}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:start}
+.contact-info{background:var(--navy);color:white;border-radius:22px;padding:27px}
+.contact-info h2{font-family:Georgia,serif;font-size:2rem;font-weight:500;line-height:1.12;margin:12px 0}
+.contact-info p{color:#d2d9e1;font-size:.92rem}
+.contact-line{display:flex;align-items:center;gap:12px;margin-top:18px}
+.contact-line .icon{width:42px;height:42px;border-radius:13px;background:rgba(224,197,143,.14);color:var(--gold2);display:grid;place-items:center}
+.contact-line small{display:block;color:#c6cdd5}
+form.booking-form{background:white;border:1px solid var(--line);border-radius:22px;padding:27px;box-shadow:0 12px 35px rgba(20,38,61,.07)}
+.booking-form h3{margin:0 0 5px;color:var(--navy);font-size:1.35rem}
+.booking-form .intro{color:var(--muted);font-size:.88rem;margin:0 0 20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 13px}
+.form-grid .wide{grid-column:1/-1}
+.booking-form textarea{min-height:92px;resize:vertical}
+.form-note{font-size:.76rem;color:#737c87;margin:-5px 0 16px}
+.btn.full{width:100%}
+.disclaimer{margin-top:18px;padding:16px 18px;border-radius:14px;background:#f8f5ee;border:1px solid #e8deca;color:#6b604e;font-size:.8rem}
+footer{background:#0e1c2d;color:#c2cad3;padding:29px 0;font-size:.82rem}
+.footer-row{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.footer-brand{color:white;font-weight:850;letter-spacing:.04em}
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:25;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#20c56a;color:white;font-size:1.5rem;box-shadow:0 10px 28px rgba(0,0,0,.22);border:3px solid white}
+@media(max-width:950px){.search-grid{grid-template-columns:repeat(3,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}.hero{min-height:550px}}
+@media(max-width:760px){.hero{min-height:560px;background-position:58% center}.hero-content{padding:72px 0 100px}.nav-links{display:none;position:absolute;top:78px;left:0;right:0;background:white;padding:18px 22px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:16px}.nav-links.open{display:flex}.menu-toggle{display:block}.nav .nav-cta{display:none}.search-grid{grid-template-columns:1fr 1fr}.search-grid .field:first-child{grid-column:1/-1}.search-grid .search-submit{grid-column:1/-1}.benefits{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.host-banner{align-items:flex-start;flex-direction:column}.host-banner:after{right:-70px}}
+@media(max-width:520px){.container{width:calc(100% - 30px)}.brand{font-size:.83rem}.brand-mark{width:38px;height:38px}.hero{min-height:590px}.hero-content{padding:64px 0 90px}h1{font-size:3rem}.hero-copy{font-size:.98rem}.search-wrap{margin-top:-42px}.search-card{padding:17px}.search-grid{grid-template-columns:1fr 1fr;gap:9px}.search-grid .field:first-child{grid-column:1/-1}.category-grid{gap:12px}.category-card{min-height:220px;padding:15px}.category-card h3{font-size:1.28rem}.category-card p{font-size:.74rem}section{padding:62px 0}.host-banner{padding:25px}.host-banner h2{font-size:1.7rem}.form-grid{grid-template-columns:1fr}.form-grid .wide{grid-column:auto}form.booking-form,.contact-info{padding:21px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="#home"><span class="brand-mark">A</span><span>AARIZHOMESTAY</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Utama</a><a href="#kategori">Penginapan</a><a href="#kelebihan">Kenapa Kami</a><a href="#pemilik">Untuk Pemilik</a><a href="#hubungi">Hubungi</a>
+    </nav>
+    <a class="btn nav-cta" href="#carian">Cari Penginapan</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <div class="eyebrow">Tempat menginap pilihan anda</div>
+    <h1>Stay Somewhere<br><span>Wonderful.</span></h1>
+    <p class="hero-copy">Temui penginapan yang sesuai untuk percutian, urusan kerja atau short stay anda. Pilih homestay, hotel, Airbnb atau studio dengan mudah.</p>
+    <div class="hero-actions"><a class="btn gold" href="#carian">Cari Penginapan <span>→</span></a><a class="btn outline" href="#kategori">Terokai Pilihan</a></div>
+    <p class="hero-note">Pilihan penginapan untuk solo traveller, pasangan, keluarga dan kumpulan.</p>
+  </div>
+</section>
+
+<div class="container search-wrap" id="carian">
+  <div class="search-card">
+    <div class="search-title"><h2>Di mana anda ingin menginap?</h2><span>Pertanyaan terus melalui WhatsApp</span></div>
+    <form id="searchForm">
+      <div class="search-grid">
+        <div class="field"><label for="destination">Lokasi / Destinasi</label><input id="destination" type="text" placeholder="Contoh: Kuala Lumpur" required></div>
+        <div class="field"><label for="checkin">Check-in</label><input id="checkin" type="date"></div>
+        <div class="field"><label for="checkout">Check-out</label><input id="checkout" type="date"></div>
+        <div class="field"><label for="guests">Tetamu</label><select id="guests"><option>1 orang</option><option selected>2 orang</option><option>3 orang</option><option>4 orang</option><option>5 orang</option><option>6 orang</option><option>7 orang</option><option>8+ orang</option></select></div>
+        <div class="field"><label for="stayType">Jenis penginapan</label><select id="stayType"><option value="Apa-apa jenis">Semua jenis</option><option>Homestay</option><option>Hotel</option><option>Airbnb</option><option>Studio</option></select></div>
+        <div class="search-submit"><button class="btn gold" type="submit" style="width:100%">Cari Sekarang</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<section class="section-cream" id="kategori">
+  <div class="container">
+    <div class="section-head"><div class="eyebrow">Terokai penginapan</div><h2>Pilih Penginapan Mengikut Gaya Anda</h2><p>Daripada percutian keluarga hingga penginapan ringkas untuk urusan kerja, pilih kategori yang anda perlukan.</p></div>
+    <div class="category-grid">
+      <a class="category-card" href="#carian" data-type="Homestay"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80" alt="Rumah homestay"><span class="arrow">↗</span><div><h3>Homestay</h3><p>Selesa untuk keluarga dan kumpulan</p></div></a>
+      <a class="category-card" href="#carian" data-type="Hotel"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" alt="Hotel dan resort"><span class="arrow">↗</span><div><h3>Hotel</h3><p>Penginapan mudah dan praktikal</p></div></a>
+      <a class="category-card" href="#carian" data-type="Airbnb"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80" alt="Apartmen Airbnb"><span class="arrow">↗</span><div><h3>Airbnb</h3><p>Ruang menarik seperti di rumah sendiri</p></div></a>
+      <a class="category-card" href="#carian" data-type="Studio"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Studio moden"><span class="arrow">↗</span><div><h3>Studio</h3><p>Ringkas, moden dan selesa</p></div></a>
+    </div>
+  </div>
+</section>
+
+<section id="senarai">
+  <div class="container">
+    <div class="section-head"><div class="eyebrow">Pilihan penginapan</div><h2>Tempat Selesa, Kenangan Bermakna</h2><p>Kami sedang menyusun senarai penginapan. Hantar lokasi, tarikh dan bajet anda untuk kami bantu semak pilihan yang sesuai.</p></div>
+    <div class="empty-state">
+      <div class="empty-icon">⌂</div>
+      <h3>Senarai penginapan akan dikemas kini</h3>
+      <p>Belum ada listing penginapan aktif dipaparkan di laman ini. Hubungi kami untuk pertanyaan carian dan semakan harga serta kekosongan terkini.</p>
+      <a class="btn" href="https://wa.me/601127838726?text=Salam%20AarizHomestay%2C%20saya%20ingin%20bertanya%20tentang%20penginapan.">Tanya Penginapan di WhatsApp →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-cream" id="kelebihan">
+  <div class="container">
+    <div class="section-head"><div class="eyebrow">Mudah dan jelas</div><h2>Kenapa Hubungi AarizHomestay?</h2><p>Kami membantu memudahkan proses pertanyaan supaya anda boleh membuat pilihan dengan lebih yakin.</p></div>
+    <div class="benefits">
+      <article class="benefit"><div class="benefit-icon">⌕</div><h3>Carian Mengikut Keperluan</h3><p>Beritahu destinasi, tarikh, bilangan tetamu dan bajet untuk memulakan carian.</p></article>
+      <article class="benefit"><div class="benefit-icon">◇</div><h3>Pelbagai Jenis Penginapan</h3><p>Pertanyaan untuk homestay, hotel, Airbnb dan studio dalam satu tempat.</p></article>
+      <article class="benefit"><div class="benefit-icon">✓</div><h3>Semakan Sebelum Tempahan</h3><p>Harga, ketersediaan, deposit, polisi dan butiran penginapan perlu disahkan sebelum bayaran.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="pemilik">
+  <div class="container">
+    <div class="host-banner">
+      <div><div class="eyebrow">Untuk pemilik penginapan</div><h2>Ada Homestay atau Unit Untuk Disewakan?</h2><p>Perkenalkan penginapan anda kepada bakal tetamu. Hubungi AarizHomestay untuk berbincang tentang maklumat listing dan kaedah kerjasama.</p></div>
+      <a class="btn gold" href="https://wa.me/601127838726?text=Salam%20AarizHomestay%2C%20saya%20pemilik%20penginapan%20dan%20berminat%20untuk%20mendaftarkan%20listing.">Daftar Penginapan →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-cream" id="faq">
+  <div class="container">
+    <div class="section-head"><div class="eyebrow">Soalan lazim</div><h2>Perkara Yang Anda Perlu Tahu</h2></div>
+    <div class="faq-list">
+      <details><summary>Bagaimana cara membuat pertanyaan tempahan?</summary><p>Isi borang carian dengan lokasi, tarikh, bilangan tetamu dan jenis penginapan. Maklumat tersebut akan disediakan dalam mesej WhatsApp untuk dihantar kepada kami.</p></details>
+      <details><summary>Adakah harga dan kekosongan dipaparkan secara langsung?</summary><p>Belum. Setiap harga dan kekosongan perlu disemak serta disahkan dengan pemilik atau penyedia penginapan sebelum tempahan disahkan.</p></details>
+      <details><summary>Adakah saya perlu membuat bayaran melalui website?</summary><p>Tidak. Website ini hanya menerima pertanyaan awal melalui WhatsApp. Jangan membuat bayaran sebelum identiti penyedia, butiran tempahan, jumlah bayaran dan polisi pembatalan disahkan.</p></details>
+      <details><summary>Adakah AarizHomestay laman rasmi Airbnb atau hotel?</summary><p>Tidak. AarizHomestay ialah perkhidmatan carian dan pertanyaan penginapan bebas, bukan laman rasmi Airbnb, hotel atau platform tempahan lain.</p></details>
+      <details><summary>Bolehkah pemilik mendaftarkan penginapan?</summary><p>Boleh. Pemilik boleh menghubungi kami melalui WhatsApp untuk membincangkan maklumat penginapan, gambar, harga dan syarat kerjasama.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="hubungi">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <div class="eyebrow">Hubungi kami</div><h2>Rancang Penginapan Anda Bersama Kami.</h2>
+      <p>Hantar pertanyaan dan kami akan membantu menyemak pilihan yang bersesuaian.</p>
+      <div class="contact-line"><div class="icon">✆</div><div><strong>WhatsApp</strong><small>+60 11-2783 8726</small></div></div>
+      <div class="contact-line"><div class="icon">⌂</div><div><strong>AarizHomestay</strong><small>Homestay · Hotel · Airbnb · Studio</small></div></div>
+    </div>
+    <form class="booking-form" id="bookingForm">
+      <h3>Hantar Pertanyaan Penginapan</h3><p class="intro">Lengkapkan maklumat asas. WhatsApp akan dibuka dengan mesej pertanyaan anda.</p>
+      <div class="form-grid">
+        <div class="field wide"><label for="guestName">Nama</label><input id="guestName" type="text" placeholder="Nama anda" maxlength="70" required></div>
+        <div class="field wide"><label for="formDestination">Lokasi pilihan</label><input id="formDestination" type="text" placeholder="Contoh: Shah Alam, Kuala Lumpur" required></div>
+        <div class="field"><label for="formCheckin">Tarikh check-in</label><input id="formCheckin" type="date"></div>
+        <div class="field"><label for="formCheckout">Tarikh check-out</label><input id="formCheckout" type="date"></div>
+        <div class="field"><label for="formGuests">Bilangan tetamu</label><select id="formGuests"><option>1 orang</option><option selected>2 orang</option><option>3 orang</option><option>4 orang</option><option>5 orang</option><option>6 orang</option><option>7 orang</option><option>8+ orang</option></select></div>
+        <div class="field"><label for="formBudget">Bajet (RM)</label><input id="formBudget" type="number" min="0" step="10" placeholder="Contoh: 250"></div>
+        <div class="field wide"><label for="formType">Jenis penginapan</label><select id="formType"><option>Mana-mana jenis</option><option>Homestay</option><option>Hotel</option><option>Airbnb</option><option>Studio</option></select></div>
+        <div class="field wide"><label for="formNotes">Keperluan tambahan (pilihan)</label><textarea id="formNotes" maxlength="500" placeholder="Contoh: 2 bilik tidur, parking, kolam renang..."></textarea></div>
+      </div>
+      <p class="form-note">Jangan masukkan maklumat kad bank, kata laluan atau maklumat sulit.</p>
+      <button class="btn gold full" type="submit">Hantar Melalui WhatsApp →</button>
+      <div class="disclaimer">Pertanyaan ini bukan pengesahan tempahan. Harga, kekosongan, deposit dan polisi perlu disahkan terlebih dahulu dengan pihak penginapan.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="container footer-row"><div><div class="footer-brand">AARIZHOMESTAY</div><div>© <span id="year"></span> AarizHomestay. Hak cipta terpelihara.</div></div><div>Perkhidmatan pertanyaan penginapan bebas · Bukan laman rasmi Airbnb atau hotel.</div></div></footer>
+<a class="wa-float" href="https://wa.me/601127838726?text=Salam%20AarizHomestay%2C%20saya%20ingin%20bertanya%20tentang%20penginapan." target="_blank" rel="noopener noreferrer" aria-label="Hubungi AarizHomestay melalui WhatsApp">✆</a>
+
+<script>
+const WA_NUMBER = "601127838726";
+const $ = id => document.getElementById(id);
+const today = new Date();
+const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0,10);
+["checkin","checkout","formCheckin","formCheckout"].forEach(id => { $(id).min = localToday; });
+$("checkin").addEventListener("change", () => { $("checkout").min = $("checkin").value || localToday; });
+$("formCheckin").addEventListener("change", () => { $("formCheckout").min = $("formCheckin").value || localToday; });
+
+$("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const destination = $("destination").value.trim();
+  const checkin = $("checkin").value || "Belum ditetapkan";
+  const checkout = $("checkout").value || "Belum ditetapkan";
+  const guests = $("guests").value;
+  const type = $("stayType").value;
+  const message = `Salam AarizHomestay, saya ingin mencari penginapan.%0A%0ALokasi: ${encodeURIComponent(destination)}%0ACheck-in: ${encodeURIComponent(checkin)}%0ACheck-out: ${encodeURIComponent(checkout)}%0ATetamu: ${encodeURIComponent(guests)}%0AJenis: ${encodeURIComponent(type)}%0A%0AMohon bantu semak pilihan, harga dan kekosongan.`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, "_blank", "noopener,noreferrer");
+});
+
+$("bookingForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const name = $("guestName").value.trim();
+  const destination = $("formDestination").value.trim();
+  if (!name || !destination) { alert("Sila lengkapkan nama dan lokasi pilihan."); return; }
+  const fields = [
+    "Salam AarizHomestay, saya ingin membuat pertanyaan penginapan.",
+    `Nama: ${name}`,
+    `Lokasi: ${destination}`,
+    `Check-in: ${$("formCheckin").value || "Belum ditetapkan"}`,
+    `Check-out: ${$("formCheckout").value || "Belum ditetapkan"}`,
+    `Tetamu: ${$("formGuests").value}`,
+    `Bajet: ${$("formBudget").value ? "RM " + $("formBudget").value : "Belum ditetapkan"}`,
+    `Jenis: ${$("formType").value}`,
+    `Keperluan tambahan: ${$("formNotes").value.trim() || "Tiada"}`,
+    "",
+    "Saya faham bahawa pertanyaan ini belum mengesahkan tempahan."
+  ];
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(fields.join("\n"))}`, "_blank", "noopener,noreferrer");
+});
+
+const menuToggle = $("menuToggle");
+const navLinks = $("navLinks");
+menuToggle.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(open));
+  menuToggle.textContent = open ? "✕" : "☰";
+});
+navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+  navLinks.classList.remove("open");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.textContent = "☰";
+}));
+document.querySelectorAll(".category-card").forEach(card => card.addEventListener("click", () => {
+  $("stayType").value = card.dataset.type;
+}));
+$("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
